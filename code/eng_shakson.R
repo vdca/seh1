@@ -180,14 +180,9 @@ d <- dlong %>%
   select(language, sample, template, lineID, position,
          prominence, lengthline, value, deviation, relpos, uniqueLineID)
 
-# saveRDS(d, "../data/eng/processed/eng_shakson_dev1.rds")
-# write_tsv(d, "../data/eng/processed/eng_shakson_dev1.tsv")
-
 #--------------------------------------------------------
 # summarise by position in template, add entropy
 #--------------------------------------------------------
-
-# d <- readRDS("../data/eng/processed/eng_shakson_dev1.rds")
 
 # summarise data by sample
 dsum <- d %>% 
