@@ -64,7 +64,7 @@ lineRelID <- map(poemlenLines, seq) %>%
 lineAbsID <- paste(poemID, lineRelID, sep = "_")
 
 # put together IDs and line data
-ddf <- data_frame(poemID, lineRelID, lineAbsID, dl)
+ddf <- tibble(poemID, lineRelID, lineAbsID, dl)
 
 # split syllables
 dsyl <- ddf %>% 

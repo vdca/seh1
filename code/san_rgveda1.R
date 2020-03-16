@@ -55,16 +55,22 @@ dlong <- dwide %>%
 
 tmplt11 <- tibble(sample = "rgveda11",
                   template = "iam6a",
-                  position = seq(11),
+                  lengthline = 11,
+                  position = seq(lengthline),
+                  relpos = (position-1) / (lengthline-1),
                   prominence = c(rep(c(0, 1), 5), 0))
 tmplt12 <- tibble(sample = "rgveda12",
                   template = "iam6b",
-                  position = seq(12),
+                  lengthline = 12,
+                  position = seq(lengthline),
+                  relpos = (position-1) / (lengthline-1),
                   prominence = c(rep(c(0, 1), 6)))
 tmplt8 <- tibble(sample = "rgveda8",
-                  template = "iam4",
-                  position = seq(8),
-                  prominence = c(rep(c(0, 1), 4)))
+                 template = "iam4",
+                 lengthline = 8,
+                 position = seq(lengthline),
+                 relpos = (position-1) / (lengthline-1),
+                 prominence = c(rep(c(0, 1), 4)))
 templates <- bind_rows(tmplt11, tmplt12, tmplt8)
 
 # estimate n of lines in each sample provided by gunkel&ryan2011.
@@ -91,9 +97,11 @@ dsum <- dlong %>%
   left_join(sizes) %>% 
   mutate(c1 = (f1*size) %>% round(0),
          c0 = (f0*size) %>% round(0)) %>% 
-  mutate(entropy = diversity(.[,c("c1", "c0")], base = 2))
+  mutate(entropy = diversity(.[,c("c1", "c0")], base = 2)) %>% 
+  select(language, template, sample, position, relpos, prominence,
+         size, c1, c0, f1, f0, entropy)
 
-# saveRDS(dsum, "../data/san/san_rgveda_entropy1.rds")
-# write_tsv(dsum, "../data/san/san_rgveda_entropy1.tsv")
-# dsum <- readRDS("../data/san/san_rgveda_entropy1.rds")
+# saveRDS(dsum, "../data/san/processed/san_rgveda_entropy1.rds")
+# write_tsv(dsum, "../data/san/processed/san_rgveda_entropy1.tsv")
+# dsum <- readRDS("../data/san/processed/san_rgveda_entropy1.rds")
 
